@@ -1,1 +1,116 @@
+#EJERCICIOS PANDAS
+import pandas as pd
+import numpy as np
+import xlsxwriter
+
+# 1. CREAR UN DATAFRAME A PARTIR DEL DICCIONARIO QUE SE ENCUENTRA AL FINAL DE ESTA PÁGINA
+equipos = {"Equipos": {"1": "Santos Laguna",
+                       "2": "León",
+                       "3":"Tigres",
+                       "4":"Querétaro",
+                       "5":"Necaxa",
+                       "6":"América",
+                       "7":"Monarcas Morelia",
+                       "8":"Monterrey",
+                       "9":"Pachuca",
+                       "10":"Chivas",
+                       "11":"Club Tijuana",
+                       "12":"Cruz Azul",
+                       "13":"Pumas UNAM",
+                       "14":"Atlas",
+                       "15":"Atlético San Luis",
+                       "16":"FC Juárez",
+                       "17":"Toluca",
+                       "18":"Puebla",
+                       "19":"Veracruz"}}
+df_equipos = pd.DataFrame(equipos)
+print(df_equipos)
+
+# 2. Se podria si la llave fuera int y no str? SI
+equipos2 = {"Equipos": {1: "Santos Laguna",
+                       2: "León",
+                       3:"Tigres",
+                       4:"Querétaro",
+                       5:"Necaxa",
+                       6:"América",
+                       7:"Monarcas Morelia",
+                       8:"Monterrey",
+                       9:"Pachuca",
+                       10:"Chivas",
+                       11:"Club Tijuana",
+                       12:"Cruz Azul",
+                       13:"Pumas UNAM",
+                       14:"Atlas",
+                       15:"Atlético San Luis",
+                       16:"FC Juárez",
+                       17:"Toluca",
+                       18:"Puebla",
+                       19:"Veracruz"}}
+df_equipos2 = pd.DataFrame(equipos2)
+print(df_equipos2)
+
+#3. Ver los primeros 5 registros del dataframe
+print(df_equipos.head())
+
+#4. Ver los ultimos 10 registros del dataframe
+print(df_equipos.tail(10))
+
+#5. Mostrar las columnas del dataframe
+colf = df_equipos.Equipos.keys()
+print(colf)
+
+#6. Transformar la columna de posicion a un arreglo de numpy
+x = []
+for i in colf:
+    print(i)
+    x.append (int(i))
+xNumpy = np.array(x)
+print(x)
+
+#7. Mostrar estadistica descriptiva de los valores
+est = df_equipos.describe()
+print(est)
+
+#8. Ordenar valores alfabeticamente
+df_equipos.sort_values(by=["Equipos"], inplace=True)
+print(df_equipos)
+
+#9. Guardar valores a un csv
+df_equipos.to_csv('equipos.csv')
+df = pd.read_csv('equipos.csv')
+print(df)
+
+#10. Cargar algun excel de los disponibles en GDrive
+df_equipos.to_excel('equipos.xlsx', sheet_name='equipos')
+print("Equipos futbol: ", df_equipos)
+
+#11. Cortar un dataframe de 3x4 a partir del anterior ¿?
+
+#12. Cargar el json q se encuentra al final de esta pagina
+json_documento = {"Product":{"0":"Desktop Computer",
+                             "1": "Tablet",
+                             "2": "iPhone",
+                             "3":"Laptop"},
+                  "Price":{"0":700,
+                           "1":250,
+                           "2":800,
+                           "3":1200}}
+#13. Imprimir dataframe resultante del json
+json_df = pd.DataFrame(json_documento, columns=['Product', 'Price'])
+print(json_df)
+
+#14. Guardar a un XLS
+doc_excel = pd.ExcelWriter('producto.xlsx', engine='xlsxwriter')
+
+
+#15. Cargar el resultado de este ws en un dataframe https://api.exchangeratesapi.io/latest e imprimirlo
+doc_json = {"rates":{"CAD":1.4495,"HKD":8.4658,"ISK":137.9,"PHP":55.061,"DKK":7.4721,"HUF":337.93,"CZK":24.965,"AUD":1.626,"RON":4.7693,"SEK":10.5373,"IDR":14919.11,"INR":77.6945,"BRL":4.6995,"RUB":69.3198,"HRK":7.459,"JPY":119.73,"THB":34.082,"CHF":1.0667,"SGD":1.5127,"PLN":4.2569,"BGN":1.9558,"TRY":6.5775,"CNY":7.6025,"NOK":10.0953,"NZD":1.7055,"ZAR":16.2331,"USD":1.0901,"MXN":20.3563,"ILS":3.72,"GBP":0.84325,"KRW":1290.63,"MYR":4.5059},"base":"EUR","date":"2020-02-11"}
+
+json_df3 = pd.DataFrame(doc_json, columns = ['rates'])
+
+print(json_df3)
+
+
+
+
 
